@@ -10,6 +10,7 @@
   "dependencies": {
     "@ai-sdk/google": "latest",
     "@google/generative-ai": "latest",
+    "@vercel/postgres": "latest",
     "ai": "latest",
     "lucide-react": "latest",
     "next": "14.2.15",
