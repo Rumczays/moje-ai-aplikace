@@ -64,10 +64,14 @@ interface MediaState {
 }
 
 export default function App() {
-  const [profiles, setProfiles] = useState<Profile[]>(() => {
-    const saved = localStorage.getItem('social_profiles');
-    return saved ? JSON.parse(saved) : INITIAL_PROFILES;
-  });
+  const [profiles, setProfiles] = useState<Profile[]>(INITIAL_PROFILES);
+
+useEffect(() => {
+  const saved = localStorage.getItem('social_profiles');
+  if (saved) {
+    setProfiles(JSON.parse(saved));
+  }
+}, []);
   const [selectedProfileId, setSelectedProfileId] = useState(profiles[0].id);
   const activeProfile = profiles.find(p => p.id === selectedProfileId) || profiles[0];
 
