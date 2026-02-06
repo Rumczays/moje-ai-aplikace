@@ -2,7 +2,7 @@
 
 import { useChat } from 'ai/react';
 
-export default function Chat() {
+export default function Page() {
   // useChat automaticky komunikuje s vaším /api/chat/route.ts
   const { messages, input, handleInputChange, handleSubmit } = useChat();
 
