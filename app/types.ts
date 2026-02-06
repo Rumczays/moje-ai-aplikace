@@ -1,10 +1,22 @@
 export enum Platform {
-  INSTAGRAM = 'instagram',
-  FACEBOOK = 'facebook'
+  FACEBOOK = 'Facebook',
+  INSTAGRAM = 'Instagram'
+}
+
+export interface PostContent {
+  text: string;
+  mediaUrl: string | null;
+  mediaType: 'image' | 'video' | null;
+  platform: Platform;
 }
 
 export interface AICaptionSuggestion {
   caption: string;
   hashtags: string[];
-  recommendations: string[];
+  engagementTip: string;
+}
+
+export interface UserProfile {
+  name: string;
+  avatar: string;
 }
