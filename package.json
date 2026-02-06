@@ -5,11 +5,11 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
+    "start": "next start"
   },
   "dependencies": {
     "@ai-sdk/google": "latest",
+    "@google/generative-ai": "latest",
     "ai": "latest",
     "lucide-react": "latest",
     "next": "14.2.15",
