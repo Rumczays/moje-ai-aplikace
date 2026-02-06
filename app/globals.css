@@ -1,8 +1,28 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss';
+
+@theme inline {
+  --color-primary: #6B5BF7;
+  --color-primary-light: #8B7BFF;
+  --color-primary-dark: #5B4BE7;
+  --color-background: #FFFFFF;
+  --color-background-secondary: #F8F7FF;
+  --color-foreground: #1a1a1a;
+  --color-foreground-secondary: #666666;
+  --color-border: #E5E5E5;
+  --color-border-light: #F0F0F0;
+  --radius: 0.5rem;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
 body {
-  background: #0f172a; /* Tmavé moderní pozadí */
-  color: white;
+  background: #FFFFFF;
+  color: #1a1a1a;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
 }

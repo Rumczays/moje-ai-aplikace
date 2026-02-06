@@ -1,23 +1,53 @@
 import { google } from '@ai-sdk/google';
-import { streamText } from 'ai';
-import { sql } from '@vercel/postgres';
+import { generateObject } from 'ai';
+import { z } from 'zod';
 
-export const runtime = 'edge';
+export const runtime = 'nodejs';
+
+const CaptionSchema = z.object({
+  caption: z.string().describe('Poutavý popisek optimalizovaný pro sociální síť'),
+  hashtags: z.array(z.string()).describe('Список relevantních hashtagů'),
+  recommendations: z.array(z.string()).optional().describe('Doporučení pro zvýšení dosahu'),
+});
 
 export async function POST(req: Request) {
-  const { messages } = await req.json();
-  const posledniText = messages[messages.length - 1].content;
-
   try {
-    await sql`INSERT INTO zpravy (text) VALUES (${posledniText})`;
-  } catch (e) {
-    console.error("Chyba DB:", e);
+    const { platform, text, imageData } = await req.json();
+
+    if (!text && !imageData) {
+      return Response.json(
+        { error: 'Text nebo obrázek je povinný' },
+        { status: 400 }
+      );
+    }
+
+    const prompt = `
+      Role: Jsi profesionální Social Media Manager.
+      Cíl: Transformuj surový nápad uživatele do vysoce kvalitního příspěvku pro ${platform}.
+      Jazyk: Vždy komunikuj v češtině.
+      
+      Kontext od uživatele: "${text}"
+      Platforma: ${platform}
+      
+      Instrukce:
+      1. Vytvoř poutavý popisek optimalizovaný pro ${platform} (používej emoji, kde se to hodí).
+      2. Navrhni 5-10 populárních českých i relevantních globálních hashtagů ve formátu #hashtag.
+      3. Poskytni doporučení pro zvýšení dosahu.
+    `;
+
+    const result = await generateObject({
+      model: google('gemini-2.0-flash'),
+      schema: CaptionSchema,
+      prompt,
+    });
+
+    return Response.json(result.object);
+  } catch (error) {
+    console.error('Chyba při generování obsahu:', error);
+    return Response.json(
+      { error: 'Nepodařilo se zpracovat žádost o AI generování' },
+      { status: 500 }
+    );
   }
-
-  const result = await streamText({
-    model: google('gemini-1.5-flash'),
-    messages,
-  });
-
-  return result.toDataStreamResponse();
 }
+
