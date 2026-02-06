@@ -8,9 +8,9 @@
     "start": "next start"
   },
   "dependencies": {
-    "@ai-sdk/google": "^3.3.39",
+    "@ai-sdk/google": "^3.0.0",
     "@vercel/postgres": "^0.10.0",
-    "ai": "^3.4.33",
+    "ai": "^3.0.0",
     "lucide-react": "^0.453.0",
     "next": "14.2.15",
     "react": "^18.3.1",
