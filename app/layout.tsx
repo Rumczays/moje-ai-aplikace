@@ -1,3 +1,10 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Moje AI Aplikace",
+  description: "Vlastní chat s Gemini",
+};
+
 export default function RootLayout({
   children,
 }: {
@@ -5,7 +12,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="cs">
-      <body>{children}</body>
+      <body>
+        {children}
+      </body>
     </html>
   );
 }
