@@ -7,11 +7,11 @@
     "build": "next build",
     "start": "next start"
   },
-  "dependencies": {
-    "@ai-sdk/google": "latest",
-    "@google/generative-ai": "latest",
+"dependencies": {
+    "@ai-sdk/google": "1.0.12",
+    "@google/generative-ai": "0.21.0",
     "@vercel/postgres": "latest",
-    "ai": "latest",
+    "ai": "4.0.22",
     "lucide-react": "latest",
     "next": "14.2.15",
     "react": "^18",
