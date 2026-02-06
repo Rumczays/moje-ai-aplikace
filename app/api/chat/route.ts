@@ -6,8 +6,8 @@ export const runtime = 'nodejs';
 
 const CaptionSchema = z.object({
   caption: z.string().describe('Poutavý popisek optimalizovaný pro sociální síť'),
-  hashtags: z.array(z.string()).describe('Список relevantních hashtagů'),
-  recommendations: z.array(z.string()).optional().describe('Doporučení pro zvýšení dosahu'),
+  hashtags: z.array(z.string()).describe('Relevantní hashtagy'),
+  engagementTip: z.string().describe('Tip pro zvýšení engagement a dosahu'),
 });
 
 export async function POST(req: Request) {
@@ -31,8 +31,8 @@ export async function POST(req: Request) {
       
       Instrukce:
       1. Vytvoř poutavý popisek optimalizovaný pro ${platform} (používej emoji, kde se to hodí).
-      2. Navrhni 5-10 populárních českých i relevantních globálních hashtagů ve formátu #hashtag.
-      3. Poskytni doporučení pro zvýšení dosahu.
+      2. Navrhni 5-10 populárních českých hashtagů ve formátu #hashtag.
+      3. Poskytni jeden krátký tip pro zvýšení engagement a dosahu.
     `;
 
     const result = await generateObject({
